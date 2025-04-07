@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Driver Summary</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      .good {
+        background-color: #c8e6c9;
+      }
+      .bad {
+        background-color: #ffcdd2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Driver Performance Summary</h1>
+    <table>
+      <tr>
+        <th>Driver ID</th>
+        <th>Classification</th>
+        <th>Confidence</th>
+      </tr>
+      {% for data in summary_data %}
+      <tr class="{{ data.classification|lower }}">
+        <td>{{ data.driver_id }}</td>
+        <td>{{ data.classification }}</td>
+        <td>{{ data.confidence }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

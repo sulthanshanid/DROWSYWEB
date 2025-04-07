@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800 p-6">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">
+        Recent Drowsiness Events
+      </h1>
+
+      <div class="overflow-x-auto">
+        <table
+          class="min-w-full bg-white border border-gray-200 rounded-lg shadow"
+        >
+          <thead class="bg-blue-600 text-white">
+            <tr>
+              <th class="py-3 px-4 text-left">ID</th>
+              <th class="py-3 px-4 text-left">Driver</th>
+              <th class="py-3 px-4 text-left">Status</th>
+              <th class="py-3 px-4 text-left">Duration (s)</th>
+              <th class="py-3 px-4 text-left">Timestamp</th>
+              <th class="py-3 px-4 text-left">Photo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in entries %}
+            <tr class="border-t border-gray-200 hover:bg-gray-50">
+              <td class="py-2 px-4">{{ entry.id }}</td>
+              <td class="py-2 px-4">{{ entry.driver_name }}</td>
+              <td class="py-2 px-4">{{ entry.status }}</td>
+              <td class="py-2 px-4">{{ entry.duration }}</td>
+              <td class="py-2 px-4">{{ entry.timestamp }}</td>
+              <td class="py-2 px-4">
+                {% if entry.photo_path %}
+                <img
+                  src="{{ entry.photo_path }}"
+                  alt="Driver Photo"
+                  class="w-12 h-12 object-cover rounded"
+                />
+                {% else %}
+                <span class="text-gray-500 italic">No photo</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 text-center">
+        <a
+          href="{{ url_for('home') }}"
+          class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+        >
+          Back
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
